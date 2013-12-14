@@ -1,0 +1,11 @@
+server {
+    listen 127.0.0.1:{{ port }};
+    location / {
+      try_files $uri @{{ application_name }};
+    }
+
+    location @{{ application_name }} {
+      include uwsgi_params;
+      uwsgi_pass unix:{{ socket_path }};
+    }
+}

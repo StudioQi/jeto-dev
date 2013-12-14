@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# echo -e "\nserver    : `cat /root/.mdg 2>/dev/null`"
+
+echo -e "\nip        : `cat /etc/network/interfaces | grep \"address\" | head -n 1 | awk '{print $2}'`"
+echo -e "hostname  : `hostname`"

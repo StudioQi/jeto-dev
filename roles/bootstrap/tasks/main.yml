@@ -1,0 +1,20 @@
+---
+# Create admin user and prevent root login
+
+# Admin user
+- name: create admin user
+  user: name={{admin_name}} home=/home/{{admin_name}} shell=/bin/bash
+- name: add authorized keys
+  authorized_key: "key='{{ lookup('file', '~/.ssh/id_rsa.pub') }}' user={{admin_name}}"
+- name: passwordless sudo
+  copy: "dest=/etc/sudoers.d/{{admin_name}} content='{{ admin_name}} ALL=NOPASSWD: ALL'"
+
+# SSH config
+#- name: limit logins to admin
+#  lineinfile: dest=/etc/ssh/sshd_config regexp=^AllowUsers line=AllowUsers={{admin_name}}
+#  notify: restart ssh
+#- name: prevent root login
+#  lineinfile: dest=/etc/ssh/sshd_config regexp=^PermitRootLogin line=PermitRootLogin=no
+#  notify: restart ssh
+
+- include: accelerate.yml tags=accelerate

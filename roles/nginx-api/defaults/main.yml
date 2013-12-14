@@ -1,0 +1,7 @@
+---
+application_name: 'nginx-api'
+application_description: 'Manages vhost for nginx'
+user: 'root'
+home: '/root'
+socket_path: '{{ home }}/{{ application_name }}.sock'
+port: 5000

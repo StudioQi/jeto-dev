@@ -1,0 +1,7 @@
+---
+application_name: 'htpasswd-api'
+application_description: 'Small API that generates htpasswd'
+user: 'crevette'
+home: '/home/crevette'
+socket_path: '/var/run/{{ application_name }}.sock'
+port: 7000

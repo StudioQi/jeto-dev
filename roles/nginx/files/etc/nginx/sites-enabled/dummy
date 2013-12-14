@@ -1,0 +1,17 @@
+server {
+  listen 80 default_server;
+  listen [::]:80 default_server ipv6only=on;
+  server_name localhost;
+
+  location / {
+    return 204;
+  }
+
+  # Enable status page for monitoring
+  location /nginx_status {
+    stub_status on;
+    access_log  off;
+    allow 127.0.0.1;
+    deny all;
+  }
+}

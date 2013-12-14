@@ -1,0 +1,30 @@
+---
+- name: Create user if it doesn't exists
+  user: name={{ user }} home={{ home }}
+
+- name: Create the vassals folder
+  file: path="{{ home }}/vassals" owner={{ user }} state=directory
+
+- name: Create the vassal
+  template: src=vassal.ini.j2 dest={{ home}}/vassals/{{ application_name }}.ini
+
+- name: Create the nginx site
+  template: src=nginx-site.j2 dest=/etc/nginx/sites-available/{{ application_name }}
+
+- name: Enable the nginx site
+  file: src=/etc/nginx/sites-available/{{ application_name }} dest=/etc/nginx/sites-enabled/{{ application_name }} state=link
+
+- name: Create upstart configuration
+  template: src=upstart.conf.j2 dest=/etc/init/{{ application_name }}.conf
+
+- name: Update code
+  raw: rsync -az /vagrant/projects/{{ application_name }} {{ home }}/
+
+- name: Checks for permission
+  file: path={{ home }}/{{ application_name }} owner={{ user }} group={{ user }} recurse=yes
+
+- name: Create log folder
+  file: path=/var/log/{{ application_name }} owner={{ user }} group={{ user }} state=directory
+
+- name: Start the service {{ application_name }} 
+  service: name={{ application_name }} state=restarted

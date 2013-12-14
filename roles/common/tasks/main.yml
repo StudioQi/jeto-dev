@@ -1,0 +1,55 @@
+---
+- include: hostname.yml
+
+- name: install some admin packages
+  apt: pkg={{ item }} update_cache=yes cache_valid_time=3600 state=installed
+  with_items:
+    - sudo
+    - language-pack-en # locale woes on official Ubuntu Vagrant VM
+    - aptitude
+    - update-motd
+    - cron
+    - fail2ban
+    - curl
+    - nmap
+    - htop
+    - tree
+    - unzip
+    - systemtap-sdt-dev # dtrace
+    - iftop
+    - iotop
+    - zsh
+    - git
+    - build-essential
+    - vim
+    - rsync
+    - python-pip
+    - python-dev
+
+- name: ensure cron is running
+  service: name=cron state=started
+
+- name: nice motd
+  copy: mode=0755 src=etc/update-motd.d/{{ item }}
+                  dest=/etc/update-motd.d/{{ item }}
+  notify: restart cron
+  with_items:
+    - 20-network
+    - 30-system
+    - 95-reboot
+
+- name: Unattended security upgrades
+  apt: pkg=unattended-upgrades state=installed
+- copy: src=etc/apt/apt.conf.d/10periodic
+        dest=/etc/apt/apt.conf.d/10periodic
+# https://help.ubuntu.com/community/AutomaticSecurityUpdates
+
+- include: ntp.yml
+
+- name: Install python packages
+  pip: name={{ item }} 
+  with_items:
+    - uwsgi
+    - flask
+    - sh
+    - path.py

@@ -1,0 +1,16 @@
+#!/bin/bash
+# cores=$(grep -c ^processor /proc/cpuinfo 2>/dev/null)
+# [ "$cores" -eq "0" ] && cores=1
+# threshold="${cores:-1}.0"
+# if [ $(echo "`cut -f1 -d ' ' /proc/loadavg` < $threshold" | bc) -eq 1 ]; then
+# Requires package bc, replace cut with awk
+    echo -e "System information as of `/bin/date`\n"
+# else
+#     echo
+#     echo " System information disabled due to load higher than $threshold"
+# fi
+
+if [ -x /usr/lib/update-notifier/update-motd-updates-available ]; then
+    exec /usr/lib/update-notifier/update-motd-updates-available
+fi
+

@@ -1,0 +1,11 @@
+# Include explicitly with
+#   include conf.d/drop.conf
+
+# Don't pollute logs with crap.
+location = /favicon.ico { access_log off; log_not_found off; }
+location = /robots.txt { access_log off; log_not_found off; }
+location = /apple-touch-icon.png { access_log off; log_not_found off; }
+location = /apple-touch-icon-precomposed.png { access_log off; log_not_found off; }
+
+# Deny access to invisible files
+location ~ /\. { deny  all; access_log off; log_not_found off; }

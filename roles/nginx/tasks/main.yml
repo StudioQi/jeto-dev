@@ -1,0 +1,28 @@
+- name: install nginx
+  apt: pkg=nginx state=present
+- name: allow HTTP connections
+  command: ufw allow http
+  changed_when: false # FIXME
+
+- name: Remove link to default site
+  notify: reload nginx
+  file: dest=/etc/nginx/sites-enabled/default
+        state=absent
+- name: ignore the noise of the intenet
+  notify: reload nginx
+  copy: src=etc/nginx/conf.d/drop
+        dest=/etc/nginx/conf.d/drop
+        mode=0644
+- name: "Dummy site for stray web requests, nginx status page"
+  notify: reload nginx
+  copy: src=etc/nginx/sites-enabled/dummy
+        dest=/etc/nginx/sites-enabled/dummy
+        mode=0644
+- name: Basic security settings
+  notify: reload nginx
+  copy: src=etc/nginx/conf.d/security.conf
+        dest=/etc/nginx/conf.d/security.conf
+        mode=0644
+
+- name: start nginx
+  service: name=nginx state=started enabled=true

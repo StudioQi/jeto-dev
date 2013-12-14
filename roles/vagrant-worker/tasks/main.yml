@@ -1,0 +1,15 @@
+---
+- name: Create user if it doesn't exists
+  user: name={{ user }} home={{ home }}
+
+- name: Create upstart configuration
+  template: src=upstart.conf.j2 dest=/etc/init/{{ application_name }}.conf
+
+- name: Update code
+  copy: src=projects/{{ application_name }}/ dest={{ home }}/{{ application_name }}
+
+- name: Create log folder
+  file: path=/var/log/{{ application_name }} owner={{ user }} group={{ user }} state=directory
+
+- name: Start the service {{ application_name }} 
+  service: name={{ application_name }} state=restarted

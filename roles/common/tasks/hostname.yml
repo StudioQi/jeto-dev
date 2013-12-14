@@ -1,0 +1,13 @@
+---
+- name: get hostname
+  command: hostname
+  register: previous_hostname
+  changed_when: false # FIXME
+
+- name: hostname file
+  template: src=etc/hostname dest=/etc/hostname mode=0644
+
+- name: hostname
+  shell: hostname {{ inventory_hostname }}
+  changed_when: false # FIXME
+  # when: $previous_hostname[0] != {{ inventory_hostname }}
