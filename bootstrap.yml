@@ -5,12 +5,10 @@
   #accelerate: true
 
   roles:
-    - firewall # make idempotent.
-    - bootstrap # make fw rule for accelerate idempotent
     - common
     - nginx
 
     - nginx-api
     - htpasswd-api
     - vagrant-control
-    #   - vagrant-worker
+    - vagrant-worker

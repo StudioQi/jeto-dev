@@ -11,5 +11,17 @@
 - name: Create log folder
   file: path=/var/log/{{ application_name }} owner={{ user }} group={{ user }} state=directory
 
-- name: Start the service {{ application_name }} 
-  service: name={{ application_name }} state=restarted
+- name: Installs gearman
+  apt: pkg=gearman state=installed
+
+- name: Installs vagrant
+  apt: pkg=vagrant state=installed
+
+- name: Checks for permission
+  file: path={{ home }}/{{ application_name }} owner={{ user }} group={{ user }} recurse=yes
+
+#- name: Start the service vagrant-worker
+#  service: name={{ application_name }} state=restarted
+
+- name: Installs vagrant-worker python requirements
+  pip: requirements={{ home }}/{{ application_name }}/requirements.txt

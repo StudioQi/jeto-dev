@@ -13,6 +13,7 @@
 
 - name: Enable the nginx site
   file: src=/etc/nginx/sites-available/{{ application_name }} dest=/etc/nginx/sites-enabled/{{ application_name }} state=link
+  notify: reload nginx
 
 - name: Create upstart configuration
   template: src=upstart.conf.j2 dest=/etc/init/{{ application_name }}.conf
@@ -25,6 +26,12 @@
 
 - name: Create log folder
   file: path=/var/log/{{ application_name }} owner={{ user }} group={{ user }} state=directory
+
+- name: Installs "{{ application_name }}" python requirements
+  pip: requirements={{ home }}/{{ application_name }}/requirements.txt
+
+- name: Create the passwords folder
+  file: path={{ home }}/{{ application_name }}/passwords owner={{ user }} group={{ user }} state=directory
 
 - name: Start the service {{ application_name }} 
   service: name={{ application_name }} state=restarted

@@ -13,6 +13,7 @@
 
 - name: Enable the nginx site
   file: src=/etc/nginx/sites-available/{{ application_name }} dest=/etc/nginx/sites-enabled/{{ application_name }} state=link
+  notify: reload nginx
 
 - name: Create upstart configuration
   template: src=upstart.conf.j2 dest=/etc/init/{{ application_name }}.conf
@@ -26,8 +27,19 @@
 - name: Create log folder
   file: path=/var/log/{{ application_name }} owner={{ user }} group={{ user }} state=directory
 
-- name: Start the service {{ application_name }} 
+- name: Installs vagrant-control python requirements
+  pip: requirements={{ home }}/{{ application_name }}/requirements.txt
+
+- name: Setup the initial config
+  template: src=settings_dev.py.j2 dest={{ home}}/{{ application_name }}/vagrantControl/settings_dev.py owner={{ user }} group={{ user }} 
+
+- name: Setup the initial DB
+  shell: python {{ home }}/{{ application_name }}/initdb.py
+  when: vagrant_db is not defined
+
+- name: Set fact initial DB
+  set_fact: vagrant_db=1
+
+- name: Start the service vagrant-control
   service: name={{ application_name }} state=restarted
 
-- name: Installs {{ application_name }} python requirements
-  pip: requirements={{ home }}/{{ application_name }}/requirements.txt

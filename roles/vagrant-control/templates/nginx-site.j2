@@ -1,5 +1,6 @@
 server {
-    listen 127.0.0.1:{{ port }};
+    listen {{ port }};
+    server_name {{ server_name }};
     location / {
       try_files $uri @{{ application_name }};
     }

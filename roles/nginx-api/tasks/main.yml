@@ -28,3 +28,6 @@
 
 - name: Start the service {{ application_name }} 
   service: name={{ application_name }} state=restarted
+
+- name: Installs "{{ application_name }}" python requirements
+  pip: requirements={{ home }}/{{ application_name }}/requirements.txt
