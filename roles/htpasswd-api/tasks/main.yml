@@ -27,11 +27,11 @@
 - name: Create log folder
   file: path=/var/log/{{ application_name }} owner={{ user }} group={{ user }} state=directory
 
-- name: Installs "{{ application_name }}" python requirements
+- name: Installs the main python application requirements
   pip: requirements={{ home }}/{{ application_name }}/requirements.txt
 
 - name: Create the passwords folder
   file: path={{ home }}/{{ application_name }}/passwords owner={{ user }} group={{ user }} state=directory
 
-- name: Start the service {{ application_name }} 
+- name: Start the main application service
   service: name={{ application_name }} state=restarted

@@ -17,8 +17,8 @@
 - name: Create upstart configuration
   template: src=upstart.conf.j2 dest=/etc/init/{{ application_name }}.conf
 
-- name: Update code
-  raw: rsync -az /vagrant/projects/{{ application_name }} {{ home }}/
+#- name: Update code
+#  raw: rsync -az /vagrant/projects/{{ application_name }} {{ home }}/
 
 - name: Checks for permission
   file: path={{ home }}/{{ application_name }} owner={{ user }} group={{ user }} recurse=yes
@@ -26,8 +26,11 @@
 - name: Create log folder
   file: path=/var/log/{{ application_name }} owner={{ user }} group={{ user }} state=directory
 
-- name: Start the service {{ application_name }} 
+- name: Start the main application service
   service: name={{ application_name }} state=restarted
 
-- name: Installs "{{ application_name }}" python requirements
+- name: Installs main python application requirements
   pip: requirements={{ home }}/{{ application_name }}/requirements.txt
+
+- name: Creates the vagrant-sites-enabled folder
+  file: path=/etc/nginx/vagrant-sites-enabled state=directory
