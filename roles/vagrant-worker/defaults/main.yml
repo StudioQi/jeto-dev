@@ -1,6 +1,6 @@
 ---
 application_name: 'vagrant-worker'
 application_description: 'Worker that takes care of low level vagrant job, uses gearman'
-user: 'crevette'
-home: '/home/crevette'
+user: 'vagrant'
+home: '/home/vagrant'
 socket_path: '/tmp/{{ application_name }}.sock'

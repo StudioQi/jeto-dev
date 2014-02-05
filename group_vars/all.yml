@@ -8,12 +8,12 @@ ntp_servers:
 - 2.pool.ntp.org
 - 3.pool.ntp.org
 
-server_hostname:        "vc.pp"
-nginx_server_hostname:  "vc.pp"
+server_hostname:        "vagrantcontrol.sandbox.pheromone.ca"
+nginx_server_hostname:  "vagrantcontrol.sandbox.pheromone.ca"
 
-vagrant_control_user: "crevette"
-vagrant_worker_user: "crevette"
-htpassword_api_user: "crevette"
+vagrant_control_user: "vagrant"
+vagrant_worker_user: "vagrant"
+htpassword_api_user: "vagrant"
 
 nginx_api_user: "root"
 nginx_api_user_home: "/root"

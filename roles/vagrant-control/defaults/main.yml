@@ -1,8 +1,8 @@
 ---
 application_name: 'vagrant-control'
 application_description: 'Main UI to manage vagrant instances'
-user: 'crevette'
-home: '/home/crevette'
+user: 'vagrant'
+home: '/home/{{ user }}'
 socket_path: '/tmp/{{ application_name }}.sock'
 port: 80
 server_name: 'vagrantcontrol.sandbox.pheromone.ca'
