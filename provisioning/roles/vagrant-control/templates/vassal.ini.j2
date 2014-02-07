@@ -1,13 +1,13 @@
 [uwsgi]
 #application's base folder
-base = {{ home }}/{{ application_name }}
+base = {{ vagrant_control_home }}/{{ vagrant_control_application_name }}
 processes = 4
 app = vagrantControl
 module = %(app)
 pythonpath = %(base)
-socket = {{ socket_path }}
+socket = {{ vagrant_control_socket_path }}
 chmod-socket    = 666
 callable = app
-logto = /var/log/{{ application_name }}/%n.log
+logto = /var/log/{{ vagrant_control_application_name }}/%n.log
 workers = 10
 python-autoreload = 1

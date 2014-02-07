@@ -1,6 +1,6 @@
-description "{{ application_description }}"
+description "{{ vagrant_worker_application_description }}"
 start on runlevel [2345]
 stop on runlevel [06]
 respawn
 
-exec python {{ home }}/{{ application_name }}/worker.py start
+exec python {{ vagrant_worker_home }}/{{ vagrant_worker_application_name }}/worker.py start

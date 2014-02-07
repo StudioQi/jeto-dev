@@ -7,7 +7,7 @@
   roles:
     - common
     - nginx
-
+    
     - nginx-api
     - htpasswd-api
     - vagrant-control

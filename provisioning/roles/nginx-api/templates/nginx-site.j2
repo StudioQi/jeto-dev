@@ -1,11 +1,11 @@
 server {
-    listen 127.0.0.1:{{ port }};
+    listen 127.0.0.1:{{ nginx_api_port }};
     location / {
-      try_files $uri @{{ application_name }};
+      try_files $uri @{{ nginx_api_application_name }};
     }
 
-    location @{{ application_name }} {
+    location @{{ nginx_api_application_name }} {
       include uwsgi_params;
-      uwsgi_pass unix:{{ socket_path }};
+      uwsgi_pass unix:{{ nginx_api_socket_path }};
     }
 }

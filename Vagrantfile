@@ -16,7 +16,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder "projects/nginx-api", "/root/nginx-api"
 
   config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "bootstrap.yml"
+    ansible.playbook = "provisioning/bootstrap.yml"
     ansible.inventory_path = "inventory"
   end
 end

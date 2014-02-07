@@ -1,15 +1,15 @@
 ---
-- name: Create user if it doesn't exists
-  user: name={{ user }} home={{ home }}
+#- name: Create user if it doesn't exists
+#  user: name={{ vagrant_worker_user }} home={{ vagrant_worker_home }} state=present
 
 - name: Create upstart configuration
-  template: src=upstart.conf.j2 dest=/etc/init/{{ application_name }}.conf
+  template: src=upstart.conf.j2 dest=/etc/init/{{ vagrant_worker_application_name }}.conf
 
 - name: Update code
-  copy: src=projects/{{ application_name }}/ dest={{ home }}/{{ application_name }}
+  copy: src=../projects/{{ vagrant_worker_application_name }}/ dest={{ vagrant_worker_home }}/{{ vagrant_worker_application_name }}
 
 - name: Create log folder
-  file: path=/var/log/{{ application_name }} owner={{ user }} group={{ user }} state=directory
+  file: path=/var/log/{{ vagrant_worker_application_name }} owner={{ vagrant_worker_user }} group={{ vagrant_worker_user }} state=directory
 
 - name: Installs gearman
   apt: pkg=gearman state=installed
@@ -18,10 +18,10 @@
   apt: pkg=vagrant state=installed
 
 - name: Checks for permission
-  file: path={{ home }}/{{ application_name }} owner={{ user }} group={{ user }} recurse=yes
+  file: path={{ vagrant_worker_home }}/{{ vagrant_worker_application_name }} owner={{ vagrant_worker_user }} group={{ vagrant_worker_user }} recurse=yes
 
 #- name: Start the service vagrant-worker
 #  service: name={{ application_name }} state=restarted
 
 - name: Installs vagrant-worker python requirements
-  pip: requirements={{ home }}/{{ application_name }}/requirements.txt
+  pip: requirements={{ vagrant_worker_home }}/{{ vagrant_worker_application_name }}/requirements.txt

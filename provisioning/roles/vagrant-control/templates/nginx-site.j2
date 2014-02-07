@@ -1,12 +1,12 @@
 server {
-    listen {{ port }};
-    server_name {{ server_name }};
+    listen {{ vagrant_control_port }};
+    server_name {{ vagrant_control_server_name }};
     location / {
-      try_files $uri @{{ application_name }};
+      try_files $uri @{{ vagrant_control_application_name }};
     }
 
-    location @{{ application_name }} {
+    location @{{ vagrant_control_application_name }} {
       include uwsgi_params;
-      uwsgi_pass unix:{{ socket_path }};
+      uwsgi_pass unix:{{ vagrant_control_socket_path }};
     }
 }

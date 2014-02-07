@@ -1,7 +1,7 @@
 ---
-application_name: 'nginx-api'
-application_description: 'Manages vhost for nginx'
-user: 'root'
-home: '/root'
-socket_path: '/tmp/{{ application_name }}.sock'
-port: 5000
+nginx_api_application_name: 'nginx-api'
+nginx_api_application_description: 'Manages vhost for nginx'
+nginx_api_user: 'root'
+nginx_api_home: '/root'
+nginx_api_socket_path: '/tmp/{{ nginx_api_application_name }}.sock'
+nginx_api_port: 5000
