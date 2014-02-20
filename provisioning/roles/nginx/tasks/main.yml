@@ -1,8 +1,8 @@
 - name: install nginx
   apt: pkg=nginx state=present
-- name: allow HTTP connections
-  command: ufw allow http
-  changed_when: false # FIXME
+#- name: allow HTTP connections
+#  command: ufw allow http
+#  changed_when: false # FIXME
 
 - name: Remove link to default site
   notify: reload nginx

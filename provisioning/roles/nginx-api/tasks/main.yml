@@ -1,6 +1,6 @@
 ---
-#- name: Create user if it doesn't exists
-#  user: name={{ nginx_api_user }} home={{ nginx_api_home }} state=present
+- name: Create user if it doesn't exists
+  user: name={{ nginx_api_user }} home={{ nginx_api_home }} state=present
 
 - name: Create the vassals folder
   file: path="{{ nginx_api_home }}/vassals" owner={{ nginx_api_user }} state=directory
@@ -31,3 +31,8 @@
 
 - name: Creates the vagrant-sites-enabled folder
   file: path=/etc/nginx/vagrant-sites-enabled state=directory
+
+- name: ignore the noise of the intenet
+  notify: reload nginx
+  copy: src=vagrant.conf
+        dest=/etc/nginx/conf.d/vagrant.conf

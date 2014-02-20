@@ -1,12 +1,12 @@
 ---
-#- name: Create user if it doesn't exists
-#  user: name={{ vagrant_worker_user }} home={{ vagrant_worker_home }} state=present
+- name: Create user if it doesn't exists
+  user: name={{ vagrant_worker_user }} home={{ vagrant_worker_home }} state=present
 
 - name: Create upstart configuration
   template: src=upstart.conf.j2 dest=/etc/init/{{ vagrant_worker_application_name }}.conf
 
-- name: Update code
-  copy: src=../projects/{{ vagrant_worker_application_name }}/ dest={{ vagrant_worker_home }}/{{ vagrant_worker_application_name }}
+- name: push code
+  copy: src=../projects/{{ vagrant_worker_application_name }}/ dest={{ vagrant_worker_home }}/{{ vagrant_worker_application_name }} force=no
 
 - name: Create log folder
   file: path=/var/log/{{ vagrant_worker_application_name }} owner={{ vagrant_worker_user }} group={{ vagrant_worker_user }} state=directory
@@ -14,14 +14,32 @@
 - name: Installs gearman
   apt: pkg=gearman state=installed
 
+- name: Install packages required to manage the apt
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - python-apt
+    - python-pycurl
+
+- name: add the virtual box apt-key
+  apt_key: url=http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc state=present
+
+- name: add the virtual box apt
+  apt_repository: repo="deb http://download.virtualbox.org/virtualbox/debian precise contrib" state=present
+
+- name: add the virtualbox 4.3 package
+  apt: name=virtualbox-4.3 update_cache=yes
+
+- name: Download vagrant
+  get_url: url=https://dl.bintray.com/mitchellh/vagrant/vagrant_1.4.3_x86_64.deb dest=/tmp/vagrant.deb
+
 - name: Installs vagrant
-  apt: pkg=vagrant state=installed
+  command: dpkg -i /tmp/vagrant.deb
 
 - name: Checks for permission
   file: path={{ vagrant_worker_home }}/{{ vagrant_worker_application_name }} owner={{ vagrant_worker_user }} group={{ vagrant_worker_user }} recurse=yes
 
 #- name: Start the service vagrant-worker
-#  service: name={{ application_name }} state=restarted
+#  service: name={{ vagrant_worker_application_name }} state=restarted
 
 - name: Installs vagrant-worker python requirements
   pip: requirements={{ vagrant_worker_home }}/{{ vagrant_worker_application_name }}/requirements.txt

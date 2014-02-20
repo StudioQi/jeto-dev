@@ -1,7 +1,5 @@
 ---
 # Variables listed here are applicable to all host groups
-htpasswd_api_user: 'crevette'
-htpasswd_api_home: '/home/crevette'
 
 inventory_hostname: "crevette.pheromone.ca"
 admin_name: lefebvre
@@ -16,7 +14,7 @@ nginx_server_hostname:  "crevette.pheromone.ca"
 
 vagrant_control_user: "crevette"
 vagrant_worker_user: "crevette"
-htpassword_api_user: "crevette"
+htpasswd_api_user: 'crevette'
 
 nginx_api_user: "root"
 nginx_api_user_home: "/root"

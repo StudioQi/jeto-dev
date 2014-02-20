@@ -1,6 +1,6 @@
 ---
-#- name: Create user if it doesn't exists
-#  user: name={{ vagrant_control_user }} home={{ vagrant_control_home }} state=present
+- name: Create user if it doesn't exists
+  user: name={{ vagrant_control_user }} home={{ vagrant_control_home }} state=present
 
 - name: Create the vassals folder
   file: path="{{ vagrant_control_home }}/vassals" state=directory owner={{ vagrant_control_user }} group={{ vagrant_control_user }} 
