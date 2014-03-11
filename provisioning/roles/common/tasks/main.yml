@@ -51,3 +51,6 @@
     - flask
     - sh
     - path.py
+
+- name: set default bashrc
+  copy: src=bashrc dest=/root/.bashrc backup=yes

@@ -3,6 +3,7 @@ server {
     server_name {{ vagrant_control_server_name }};
     location /static {
       root {{ vagrant_control_home }}/vagrant-control/vagrantControl/;
+      sendfile off;
     }
     location / {
       try_files $uri @{{ vagrant_control_application_name }};

@@ -23,6 +23,8 @@
   
   - name: Create log folder
     file: path=/var/log/{{ htpasswd_api_application_name }} owner={{ htpasswd_api_user }} group={{ htpasswd_api_user }} state=directory
+
+  - debug: msg="{{ htpasswd_api_user }}  {{ htpasswd_api_home }}"
   
   - name: Installs the main python application requirements
     pip: requirements={{ htpasswd_api_home }}/{{ htpasswd_api_application_name }}/requirements.txt

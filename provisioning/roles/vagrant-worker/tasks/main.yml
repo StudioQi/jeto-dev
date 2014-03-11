@@ -1,6 +1,7 @@
 ---
 - name: Create user if it doesn't exists
   user: name={{ vagrant_worker_user }} home={{ vagrant_worker_home }} state=present
+  tags: create_user
 
 - name: Create upstart configuration
   template: src=upstart.conf.j2 dest=/etc/init/{{ vagrant_worker_application_name }}.conf
@@ -26,8 +27,14 @@
 - name: add the virtual box apt
   apt_repository: repo="deb http://download.virtualbox.org/virtualbox/debian precise contrib" state=present
 
-- name: add the virtualbox 4.3 package
-  apt: name=virtualbox-4.3 update_cache=yes
+- name: add the virtualbox 4.3 packages
+  apt: name={{ item }} update_cache=yes
+  with:
+    - virtualbox-4.3
+    - linux-headers-3.2.0-32-generic
+
+- name: vboxdrv up
+  command: /etc/init.d/vboxdrv setup
 
 - name: Download vagrant
   get_url: url=https://dl.bintray.com/mitchellh/vagrant/vagrant_1.4.3_x86_64.deb dest=/tmp/vagrant.deb
@@ -43,3 +50,7 @@
 
 - name: Installs vagrant-worker python requirements
   pip: requirements={{ vagrant_worker_home }}/{{ vagrant_worker_application_name }}/requirements.txt
+
+- name: Installs ansible
+  pip: name=ansible
+
