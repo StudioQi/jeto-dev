@@ -1,0 +1,20 @@
+---
+# Variables listed here are applicable to all host groups
+
+admin_name: lefebvre
+ntp_servers:
+- 0.pool.ntp.org
+- 1.pool.ntp.org
+- 2.pool.ntp.org
+- 3.pool.ntp.org
+
+server_hostname:        "vagrantcontrol.sandbox.pheromone.ca"
+nginx_server_hostname:  "vagrantcontrol.sandbox.pheromone.ca"
+
+vagrant_control_user: "vagrant"
+vagrant_worker_user: "vagrant"
+htpasswd_api_user: "vagrant"
+
+nginx_api_user: "root"
+nginx_api_user_home: "/root"
+nginx_api_socket_path: "/var/run/nginx-api.pid"
