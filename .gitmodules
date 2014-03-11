@@ -1,0 +1,12 @@
+[submodule "projects/vagrant-control"]
+	path = projects/vagrant-control
+	url = git@github.com:Pheromone/vagrant-control.git
+[submodule "projects/vagrant-worker"]
+	path = projects/vagrant-worker
+	url = git@github.com:Pheromone/vagrant-worker.git
+[submodule "projects/htpasswd-api"]
+	path = projects/htpasswd-api
+	url = git@github.com:Pheromone/htpasswd-api.git
+[submodule "projects/nginx-api"]
+	path = projects/nginx-api
+	url = git@github.com:Pheromone/nginx-api.git
