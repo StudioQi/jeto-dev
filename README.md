@@ -7,7 +7,7 @@ To run the project you will need :
 
 # Cloning
 
-This projects includes multiple smaller project, make sure to use --recursive
+This projects includes multiple smaller projects, make sure to use --recursive
 when cloning.
 
     git clone --recursive https://github.com/Pheromone/vagrant-control-dev.git
