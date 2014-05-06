@@ -7,6 +7,4 @@ To run the project you will need :
 
 # Note 
 
-To use ansible directly on the machine without talking to vagrant :
-
-        ansible default -i vagrant_ansible_inventory_default --private-key=~/.vagrant.d/insecure_private_key -u vagrant -m setup
+Keep in mind that this project is closer to ALPHA than to STABLE. DO NOT use on production system.

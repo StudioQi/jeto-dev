@@ -29,9 +29,12 @@
 
 - name: add the virtualbox 4.3 packages
   apt: name={{ item }} update_cache=yes
-  with:
+  with_items:
     - virtualbox-4.3
     - linux-headers-3.2.0-32-generic
+
+- name: Add redis
+  apt: name=redis-server state=present
 
 - name: vboxdrv up
   command: /etc/init.d/vboxdrv setup
