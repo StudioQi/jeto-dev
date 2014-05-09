@@ -21,8 +21,8 @@
 - name: Checks for permission
   file: path={{ vagrant_control_home }}/{{ vagrant_control_application_name }} owner={{ vagrant_control_user }} group={{ vagrant_control_user }} recurse=yes
 
-- name: Create log folder
-  file: path=/var/log/{{ vagrant_control_application_name }} owner={{ vagrant_control_user }} group={{ vagrant_control_user }} state=directory
+- name: Create log folder and make sure permissions are right
+  file: path=/var/log/{{ vagrant_control_application_name }} owner={{ vagrant_control_user }} group={{ vagrant_control_user }} state=directory recurse=yes
 
 - name: Installs vagrant-control python requirements
   pip: requirements={{ vagrant_control_home }}/{{ vagrant_control_application_name }}/requirements.txt

@@ -24,5 +24,10 @@
         dest=/etc/nginx/conf.d/security.conf
         mode=0644
 
+- name: Transfer ssl
+  copy: src=etc/nginx/ssl
+        dest=/etc/nginx/
+        mode=0644
+
 - name: start nginx
   service: name=nginx state=started enabled=true

@@ -17,9 +17,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.vm.synced_folder "projects/nginx-api", "/root/nginx-api"
 
     v.vm.provider :virtualbox do |vb, override|
-      override.vm.box = "precise64"
-      override.vm.box_url = "http://release.crevette.pheromone.ca/ubuntu-12.04.box"
+      override.vm.box = "trusty64"
+      override.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
       override.vm.network :private_network, ip: $ip
+      vb.memory = 1024
+      vb.cpus = 2
     end
 
     v.vm.provider :lxc do |lxc, override|
