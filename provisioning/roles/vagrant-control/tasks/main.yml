@@ -24,11 +24,21 @@
 - name: Create log folder and make sure permissions are right
   file: path=/var/log/{{ vagrant_control_application_name }} owner={{ vagrant_control_user }} group={{ vagrant_control_user }} state=directory recurse=yes
 
+- name: Installs the ubuntu required packages
+  apt: pkg=python-mysqldb state=installed
+
 - name: Installs vagrant-control python requirements
   pip: requirements={{ vagrant_control_home }}/{{ vagrant_control_application_name }}/requirements.txt
 
 - name: Setup the initial config
   template: src=settings_dev.py.j2 dest={{ vagrant_control_home}}/{{ vagrant_control_application_name }}/vagrantControl/settings_dev.py owner={{ vagrant_control_user }} group={{ vagrant_control_user }} 
+
+- name: Installs mysql
+  apt: pkg=mysql-server state=installed
+
+- name: Creates the database
+  mysql_db: name=vagrantcontrol state=present
+- mysql_user: name=vagrantcontrol password=vagrantcontrol priv=vagrantcontrol.*:ALL state=present
 
 - name: Setup the initial DB
   shell: python {{ vagrant_control_home }}/{{ vagrant_control_application_name }}/initdb.py
