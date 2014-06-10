@@ -39,5 +39,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       #ansible.inventory_path = "inventory"
       #ansible.verbose = 'vvvv'
     end
+
+    v.vm.provision "shell", run: "always" do |s|
+      s.inline = "service vagrant-control restart && service nginx-api restart && service htpasswd-api restart"
+    end
   end
 end
