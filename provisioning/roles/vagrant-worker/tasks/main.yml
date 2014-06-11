@@ -45,7 +45,7 @@
 - name: Installs vagrant plugin
   command: vagrant plugin install {{ item }}
   with_items:
-      - vagrant-lxc
+      - vagrant-lxc --plugin-version 1.0.0.alpha.2
       - vagrant-vsphere
 
 - name: Checks for permission
