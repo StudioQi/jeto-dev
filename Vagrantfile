@@ -41,7 +41,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
 
     v.vm.provision "shell", run: "always" do |s|
-      s.inline = "service vagrant-control restart && service nginx-api restart && service htpasswd-api restart"
+      s.inline = <<SCRIPT
+      service vagrant-control restart
+      service nginx-api restart
+      service htpasswd-api restart
+      python /home/vagrant/vagrant-worker/worker.py high &
+      python /home/vagrant/vagrant-worker/worker.py low &
+SCRIPT
     end
   end
 end
