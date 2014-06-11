@@ -30,8 +30,14 @@
 - name: Installs vagrant-control python requirements
   pip: requirements={{ vagrant_control_home }}/{{ vagrant_control_application_name }}/requirements.txt
 
+- name: Check if we need to generate a default config
+  command: ls {{ vagrant_control_home}}/{{ vagrant_control_application_name }}/vagrantControl/settings_dev.py
+  register: config_exists
+  ignore_errors: true
+
 - name: Setup the initial config
   template: src=settings_dev.py.j2 dest={{ vagrant_control_home}}/{{ vagrant_control_application_name }}/vagrantControl/settings_dev.py owner={{ vagrant_control_user }} group={{ vagrant_control_user }} 
+  when: config_exists|failed
 
 - name: Installs mysql
   apt: pkg=mysql-server state=installed
