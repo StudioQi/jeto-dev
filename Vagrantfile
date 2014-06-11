@@ -25,22 +25,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
 
     v.vm.provider :lxc do |lxc, override|
-      override.vm.box = 'lxc-beikou'
-      override.vm.box_url = 'http://release.crevette.pheromone.ca/lxc-beikou.box'
-      override.vm.synced_folder "sites/", "/var/www/"
-
+      override.vm.box = 'fgrehm/trusty64-lxc'
       lxc.customize 'network.ipv4', $ip_lxc
-      lxc.container_name = :machine
     end
 
     v.vm.provision "ansible" do |ansible|
       ansible.playbook = "provisioning/bootstrap.yml"
       ansible.host_key_checking = false
-      #ansible.inventory_path = "inventory"
       #ansible.verbose = 'vvvv'
     end
 
-    v.vm.provision "shell", run: "always" do |s|
+    v.vm.provision :shell, run: "always" do |s|
       s.inline = <<SCRIPT
       service vagrant-control restart
       service nginx-api restart
