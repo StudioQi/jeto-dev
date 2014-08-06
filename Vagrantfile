@@ -41,7 +41,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             LXC_DHCP_RANGE="10.0.253.2,10.0.253.254"
             LXC_DHCP_MAX="253"
             LXC_SHUTDOWN_TIMEOUT=120
-            STR
+STR
           fi
         ]      
     end

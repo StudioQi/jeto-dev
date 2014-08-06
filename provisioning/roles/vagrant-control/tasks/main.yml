@@ -56,3 +56,5 @@
 - name: Start the service vagrant-control
   service: name={{ vagrant_control_application_name }} state=restarted
 
+- name: Make sure the permission are right on the debug.log
+  file: path=/var/log/vagrant-control/debug.log owner={{ vagrant_control_user }} group={{ vagrant_control_user }} state=file
