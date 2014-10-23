@@ -37,10 +37,13 @@
   command: /etc/init.d/vboxdrv setup
 
 - name: Download vagrant
-  get_url: url=https://dl.bintray.com/mitchellh/vagrant/vagrant_1.5.4_x86_64.deb dest=/tmp/vagrant.deb
+  get_url: url=https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.5_x86_64.deb dest=/tmp/vagrant.deb
 
 - name: Installs vagrant
   command: dpkg -i /tmp/vagrant.deb
+
+- name: Instal nogokiri for vagrant-vsphere
+  apt: name=ruby-nokogiri state=present
 
 - name: Installs vagrant plugin
   command: vagrant plugin install {{ item }}
