@@ -47,7 +47,7 @@
 - mysql_user: name=vagrantcontrol password=vagrantcontrol priv=vagrantcontrol.*:ALL state=present
 
 - name: Setup the initial DB
-  shell: python {{ vagrant_control_home }}/{{ vagrant_control_application_name }}/initdb.py
+  shell: python {{ vagrant_control_home }}/{{ vagrant_control_application_name }}/manage.py db upgrade
   when: vagrant_db is not defined
 
 - name: Set fact initial DB
