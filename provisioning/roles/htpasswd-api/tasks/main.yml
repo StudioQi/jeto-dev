@@ -19,7 +19,7 @@
     template: src=upstart.conf.j2 dest=/etc/init/{{ htpasswd_api_application_name }}.conf
   
   - name: Checks for permission
-    file: path={{ htpasswd_api_home }}/{{ htpasswd_api_application_name }} owner={{ htpasswd_api_user }} group={{ htpasswd_api_user }} recurse=yes
+    file: path={{ htpasswd_api_home }}/{{ htpasswd_api_application_name }} owner={{ htpasswd_api_user }} group={{ htpasswd_api_user }} recurse=yes state=directory
   
   - name: Create log folder
     file: path=/var/log/{{ htpasswd_api_application_name }} owner={{ htpasswd_api_user }} group={{ htpasswd_api_user }} state=directory
