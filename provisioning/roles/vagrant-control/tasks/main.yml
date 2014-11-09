@@ -19,7 +19,7 @@
   template: src=upstart.conf.j2 dest=/etc/init/{{ vagrant_control_application_name }}.conf
 
 - name: Checks for permission
-  file: path={{ vagrant_control_home }}/{{ vagrant_control_application_name }} owner={{ vagrant_control_user }} group={{ vagrant_control_user }} recurse=yes
+  file: path={{ vagrant_control_home }}/{{ vagrant_control_application_name }} owner={{ vagrant_control_user }} group={{ vagrant_control_user }} recurse=yes state=directory
 
 - name: Create log folder and make sure permissions are right
   file: path=/var/log/{{ vagrant_control_application_name }} owner={{ vagrant_control_user }} group={{ vagrant_control_user }} state=directory recurse=yes
