@@ -1,6 +1,6 @@
-[submodule "projects/vagrant-control"]
+[submodule "projects/jeto"]
 	path = projects/jeto
-	url = git@github.com:Pheromone/vagrant-control.git
+	url = git@github.com:Pheromone/jeto.git
 [submodule "projects/vagrant-worker"]
 	path = projects/vagrant-worker
 	url = git@github.com:Pheromone/vagrant-worker.git
