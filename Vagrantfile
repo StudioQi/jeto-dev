@@ -7,10 +7,10 @@ $ip       = '172.16.3.2'
 $ip_lxc   = '10.0.3.16'
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.define "vagrantcontrol.sandbox.pheromone.ca" do |v|
-    v.vm.hostname = "vagrantcontrol.sandbox.pheromone.ca"
+  config.vm.define "jeto.local" do |v|
+    v.vm.hostname = "jeto.local"
 
-    v.vm.synced_folder "projects/vagrant-control", "/home/" + $user + "/vagrant-control", owner: $user, group: $user
+    v.vm.synced_folder "projects/jeto", "/home/" + $user + "/jeto", owner: $user, group: $user
     v.vm.synced_folder "projects/vagrant-worker", "/home/" + $user + "/vagrant-worker", owner: $user, group: $user
     v.vm.synced_folder "projects/htpasswd-api", "/home/" + $user + "/htpasswd-api", owner: $user, group: $user 
     v.vm.synced_folder "projects/ansible", "/home/" + $user + "/ansible", owner: $user, group: $user 
@@ -55,7 +55,7 @@ STR
 
     v.vm.provision :shell, run: "always" do |s|
       s.inline = <<SCRIPT
-      service vagrant-control restart
+      service jeto restart
       service nginx-api restart
       service htpasswd-api restart
       python /home/vagrant/vagrant-worker/worker.py high &

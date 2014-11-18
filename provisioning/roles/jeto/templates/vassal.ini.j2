@@ -1,0 +1,13 @@
+[uwsgi]
+#application's base folder
+base = {{ jeto_home }}/{{ jeto_application_name }}
+processes = 4
+app = jeto
+module = %(app)
+pythonpath = %(base)
+socket = {{ jeto_socket_path }}
+chmod-socket    = 666
+callable = app
+logto = /var/log/{{ jeto_application_name }}/%n.log
+workers = 10
+python-autoreload = 1

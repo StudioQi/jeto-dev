@@ -3,8 +3,8 @@
   user: name={{ vagrant_worker_user }} home={{ vagrant_worker_home }} state=present
   tags: create_user
 
-- name: Create upstart configuration
-  template: src=upstart.conf.j2 dest=/etc/init/{{ vagrant_worker_application_name }}.conf
+#- name: Create upstart configuration
+#  template: src=upstart.conf.j2 dest=/etc/init/{{ vagrant_worker_application_name }}.conf
 
 - name: push code
   copy: src=../projects/{{ vagrant_worker_application_name }}/ dest={{ vagrant_worker_home }}/{{ vagrant_worker_application_name }} force=no
@@ -48,7 +48,7 @@
 - name: Installs vagrant plugin
   command: vagrant plugin install {{ item }}
   with_items:
-      - vagrant-lxc --plugin-version 1.0.0.alpha.2
+      - vagrant-lxc
       - vagrant-vsphere
 
 - name: Checks for permission
@@ -62,4 +62,3 @@
 
 - name: Installs ansible
   pip: name=ansible
-

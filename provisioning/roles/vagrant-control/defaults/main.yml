@@ -1,8 +1,0 @@
----
-vagrant_control_application_name: 'vagrant-control'
-vagrant_control_application_description: 'Main UI to manage vagrant instances'
-vagrant_control_user: 'vagrant'
-vagrant_control_home: '/home/{{ vagrant_control_user }}'
-vagrant_control_socket_path: '/tmp/{{ vagrant_control_application_name }}.sock'
-vagrant_control_port: 80
-vagrant_control_server_name: 'vagrantcontrol.sandbox.pheromone.ca'

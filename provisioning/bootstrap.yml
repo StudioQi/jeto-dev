@@ -8,5 +8,5 @@
     - nginx
     - nginx-api
     - htpasswd-api
-    - vagrant-control
+    - jeto
     - vagrant-worker

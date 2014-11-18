@@ -10,7 +10,7 @@ To run the project you will need :
 This projects includes multiple smaller projects, make sure to use --recursive
 when cloning.
 
-    git clone --recursive https://github.com/Pheromone/vagrant-control-dev.git
+    git clone --recursive https://github.com/Pheromone/jeto-dev.git
 
 # Note 
 

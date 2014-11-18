@@ -1,0 +1,18 @@
+server {
+    listen {{ jeto_port }};
+    server_name {{ jeto_server_name }};
+    location /static {
+      root {{ jeto_home }}/{{ jeto_application_name }}/jeto/;
+      sendfile off;
+    }
+    location / {
+      try_files $uri @{{ jeto_application_name }};
+    }
+
+    location @{{ jeto_application_name }} {
+      include uwsgi_params;
+      uwsgi_pass unix:{{ jeto_socket_path }};
+      uwsgi_read_timeout 240;
+      uwsgi_send_timeout 240;
+    }
+}
