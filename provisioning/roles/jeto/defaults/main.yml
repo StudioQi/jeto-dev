@@ -3,6 +3,7 @@ jeto_application_name: 'jeto'
 jeto_application_description: 'Main UI to manage vagrant instances'
 jeto_user: 'vagrant'
 jeto_home: '/home/{{ jeto_user }}'
+jeto_install_dir: '{{ jeto_home }}'
 jeto_socket_path: '/tmp/{{ jeto_application_name }}.sock'
 jeto_port: 80
 jeto_server_name: 'jeto.local.pheromone.ca'

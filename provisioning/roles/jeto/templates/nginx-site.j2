@@ -2,7 +2,7 @@ server {
     listen {{ jeto_port }};
     server_name {{ jeto_server_name }};
     location /static {
-      root {{ jeto_home }}/{{ jeto_application_name }}/jeto/;
+      root {{ jeto_install_dir }}/jeto/;
       sendfile off;
     }
     location / {

@@ -19,7 +19,7 @@
   template: src=upstart.conf.j2 dest=/etc/init/{{ jeto_application_name }}.conf
 
 - name: Checks for permission
-  file: path={{ jeto_home }}/{{ jeto_application_name }} owner={{ jeto_user }} group={{ jeto_user }} recurse=yes
+  file: path={{ jeto_install_dir }} owner={{ jeto_user }} group={{ jeto_user }} recurse=yes
 
 - name: Create log folder and make sure permissions are right
   file: path=/var/log/{{ jeto_application_name }} owner={{ jeto_user }} group={{ jeto_user }} state=directory recurse=yes
@@ -28,15 +28,15 @@
   apt: pkg=python-mysqldb state=installed
 
 - name: Installs jeto python requirements
-  pip: requirements={{ jeto_home }}/{{ jeto_application_name }}/requirements.txt
+  pip: requirements={{ jeto_install_dir}}/requirements.txt
 
 - name: Check if we need to generate a default config
-  command: ls {{ jeto_home}}/{{ jeto_application_name }}/jeto/settings_dev.py
+  command: ls {{ jeto_install_dir }}/jeto/settings_dev.py
   register: config_exists
   ignore_errors: true
 
 - name: Setup the initial config
-  template: src=settings_dev.py.j2 dest={{ jeto_home}}/{{ jeto_application_name }}/jeto/settings_dev.py owner={{ jeto_user }} group={{ jeto_user }} 
+  template: src=settings_dev.py.j2 dest={{ jeto_install_dir }}/jeto/settings_dev.py owner={{ jeto_user }} group={{ jeto_user }} 
   when: config_exists|failed
 
 - name: Installs mysql
@@ -47,7 +47,7 @@
 - mysql_user: name=jeto password=jeto priv=jeto.*:ALL state=present
 
 - name: Setup the initial DB
-  shell: python manage.py db upgrade chdir="{{ jeto_home }}/{{ jeto_application_name }}/"
+  shell: python manage.py db upgrade chdir="{{ jeto_install_dir }}/"
   sudo_user: "{{ jeto_user }}"
   when: jeto_db is not defined
 
