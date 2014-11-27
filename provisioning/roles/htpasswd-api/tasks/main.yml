@@ -1,12 +1,12 @@
 ---
   - name: Create user if it doesn't exists
-    user: name={{ htpasswd_api_user }} home={{ htpasswd_api_home }} state=present
+    user: name={{ htpasswd_api_user }} home={{ htpasswd_api_user_home }} state=present
   
   - name: Create the vassals folder
-    file: path="{{ htpasswd_api_home }}/vassals" owner={{ htpasswd_api_user }} group={{ htpasswd_api_user }} state=directory 
+    file: path="{{ htpasswd_api_user_home }}/vassals" owner={{ htpasswd_api_user }} group={{ htpasswd_api_user }} state=directory 
   
   - name: Create the vassal
-    template: src=vassal.ini.j2 dest="{{ htpasswd_api_home }}/vassals/{{ htpasswd_api_application_name }}.ini" owner={{ htpasswd_api_user }} group={{ htpasswd_api_user }} 
+    template: src=vassal.ini.j2 dest="{{ htpasswd_api_user_home }}/vassals/{{ htpasswd_api_application_name }}.ini" owner={{ htpasswd_api_user }} group={{ htpasswd_api_user }} 
   
   - name: Create the nginx site
     template: src=nginx-site.j2 dest=/etc/nginx/sites-available/{{ htpasswd_api_application_name }}
@@ -19,16 +19,16 @@
     template: src=upstart.conf.j2 dest=/etc/init/{{ htpasswd_api_application_name }}.conf
   
   - name: Checks for permission
-    file: path={{ htpasswd_api_home }}/{{ htpasswd_api_application_name }} owner={{ htpasswd_api_user }} group={{ htpasswd_api_user }} recurse=yes state=directory
+    file: path={{ htpasswd_api_install_dir }}/{{ htpasswd_api_application_name }} owner={{ htpasswd_api_user }} group={{ htpasswd_api_user }} recurse=yes state=directory
   
   - name: Create log folder
     file: path=/var/log/{{ htpasswd_api_application_name }} owner={{ htpasswd_api_user }} group={{ htpasswd_api_user }} state=directory
 
   - name: Installs the main python application requirements
-    pip: requirements={{ htpasswd_api_home }}/{{ htpasswd_api_application_name }}/requirements.txt
+    pip: requirements={{ htpasswd_api_install_dir }}/{{ htpasswd_api_application_name }}/requirements.txt
   
   - name: Create the passwords folder
-    file: path={{ htpasswd_api_home }}/{{ htpasswd_api_application_name }}/passwords owner={{ htpasswd_api_user }} group={{ htpasswd_api_user }} state=directory
+    file: path={{ htpasswd_api_install_dir }}/{{ htpasswd_api_application_name }}/passwords owner={{ htpasswd_api_user }} group={{ htpasswd_api_user }} state=directory
   
   - name: Start the main application service
     service: name={{ htpasswd_api_application_name }} state=restarted

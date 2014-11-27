@@ -2,6 +2,7 @@
 htpasswd_api_application_name: 'htpasswd-api'
 htpasswd_api_application_description: 'Small API that generates htpasswd'
 htpasswd_api_user: 'crevette'
-htpasswd_api_home: '/home/{{ htpasswd_api_user }}'
+htpasswd_api_user_home: '/home/{{ htpasswd_api_user }}'
+htpasswd_api_install_dir: '{{ htpasswd_api_user_home }}'
 htpasswd_api_socket_path: '/tmp/{{ htpasswd_api_application_name }}.sock'
 htpasswd_api_port: 7000

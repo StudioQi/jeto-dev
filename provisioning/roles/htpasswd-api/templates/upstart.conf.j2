@@ -6,4 +6,4 @@ respawn
 env UWSGI=/usr/local/bin/uwsgi
 env LOGTO=/var/log/{{ htpasswd_api_application_name }}/emperor.log
 
-exec $UWSGI --master --emperor {{ htpasswd_api_home }}/vassals --die-on-term --uid {{ htpasswd_api_user }} --gid {{ htpasswd_api_user }} --logto $LOGTO
+exec $UWSGI --master --emperor {{ htpasswd_api_user_home }}/vassals --die-on-term --uid {{ htpasswd_api_user }} --gid {{ htpasswd_api_user }} --logto $LOGTO

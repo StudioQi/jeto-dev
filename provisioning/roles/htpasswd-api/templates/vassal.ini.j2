@@ -1,6 +1,6 @@
 [uwsgi]
 #application's base folder
-base = {{ htpasswd_api_home }}/{{ htpasswd_api_application_name }}
+base = {{ htpasswd_api_install_dir }}
 processes = 4
 app = app
 module = %(app)
