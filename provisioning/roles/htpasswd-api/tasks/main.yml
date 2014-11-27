@@ -19,16 +19,16 @@
     template: src=upstart.conf.j2 dest=/etc/init/{{ htpasswd_api_application_name }}.conf
   
   - name: Checks for permission
-    file: path={{ htpasswd_api_install_dir }}/{{ htpasswd_api_application_name }} owner={{ htpasswd_api_user }} group={{ htpasswd_api_user }} recurse=yes state=directory
+    file: path={{ htpasswd_api_install_dir }} htpasswd_api_application_name }} owner={{ htpasswd_api_user }} group={{ htpasswd_api_user }} recurse=yes state=directory
   
   - name: Create log folder
     file: path=/var/log/{{ htpasswd_api_application_name }} owner={{ htpasswd_api_user }} group={{ htpasswd_api_user }} state=directory
 
   - name: Installs the main python application requirements
-    pip: requirements={{ htpasswd_api_install_dir }}/{{ htpasswd_api_application_name }}/requirements.txt
+    pip: requirements={{ htpasswd_api_install_dir }}/requirements.txt
   
   - name: Create the passwords folder
-    file: path={{ htpasswd_api_install_dir }}/{{ htpasswd_api_application_name }}/passwords owner={{ htpasswd_api_user }} group={{ htpasswd_api_user }} state=directory
+    file: path={{ htpasswd_api_install_dir }}/passwords owner={{ htpasswd_api_user }} group={{ htpasswd_api_user }} state=directory
   
   - name: Start the main application service
     service: name={{ htpasswd_api_application_name }} state=restarted
