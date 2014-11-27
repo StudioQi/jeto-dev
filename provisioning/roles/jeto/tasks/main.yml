@@ -1,6 +1,6 @@
 ---
 - name: Create user if it doesn't exists
-  user: name={{ jeto_user }} home={{ jeto_home }} state=present
+  user: name={{ jeto_user }} home={{ jeto_home }} state=present shell=/bin/bash
 
 - name: Create the vassals folder
   file: path="{{ jeto_home }}/vassals" state=directory owner={{ jeto_user }} group={{ jeto_user }} 
