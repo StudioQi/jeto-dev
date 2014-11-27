@@ -1,6 +1,6 @@
 [uwsgi]
 #application's base folder
-base = {{ nginx_api_home }}/{{ nginx_api_application_name }}
+base = {{ nginx_api_install_dir }}
 processes = 4
 app = app
 module = %(app)

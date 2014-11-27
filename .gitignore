@@ -1,3 +1,5 @@
 .vagrant/
 vagrant_ansible_inventory_default
 *.swp
+host_vars/localhost
+inventory

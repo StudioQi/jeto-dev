@@ -1,12 +1,12 @@
 ---
 - name: Create user if it doesn't exists
-  user: name={{ nginx_api_user }} home={{ nginx_api_home }} state=present
+  user: name={{ nginx_api_user }} home={{ nginx_api_user_home }} state=present
 
 - name: Create the vassals folder
-  file: path="{{ nginx_api_home }}/vassals" owner={{ nginx_api_user }} state=directory
+  file: path="{{ nginx_api_user_home }}/vassals" owner={{ nginx_api_user }} state=directory
 
 - name: Create the vassal
-  template: src=vassal.ini.j2 dest={{ nginx_api_home }}/vassals/{{ nginx_api_application_name }}.ini
+  template: src=vassal.ini.j2 dest={{ nginx_api_user_home }}/vassals/{{ nginx_api_application_name }}.ini
 
 - name: Create the nginx site
   template: src=nginx-site.j2 dest=/etc/nginx/sites-available/{{ nginx_api_application_name }}
@@ -18,7 +18,7 @@
   template: src=upstart.conf.j2 dest=/etc/init/{{ nginx_api_application_name }}.conf
 
 - name: Checks for permission
-  file: path={{ nginx_api_home }}/{{ nginx_api_application_name }} owner={{ nginx_api_user }} group={{ nginx_api_user }} recurse=yes
+  file: path={{ nginx_api_install_dir }} owner={{ nginx_api_user }} group={{ nginx_api_user }} recurse=yes state=directory
 
 - name: Create log folder
   file: path=/var/log/{{ nginx_api_application_name }} owner={{ nginx_api_user }} group={{ nginx_api_user }} state=directory
@@ -27,7 +27,7 @@
   service: name={{ nginx_api_application_name }} state=restarted
 
 - name: Installs main python application requirements
-  pip: requirements={{ nginx_api_home }}/{{ nginx_api_application_name }}/requirements.txt
+  pip: requirements={{ nginx_api_install_dir }}/requirements.txt
 
 - name: Creates the vagrant-sites-enabled folder
   file: path=/etc/nginx/vagrant-sites-enabled state=directory

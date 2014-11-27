@@ -1,5 +1,5 @@
 - name: Install ntp
-  apt: name=ntp state=present
+  apt: name=ntp state=present update_cache=yes
 
 - name: Configure ntp file
   template: src=ntp.conf.j2 dest=/etc/ntp.conf
