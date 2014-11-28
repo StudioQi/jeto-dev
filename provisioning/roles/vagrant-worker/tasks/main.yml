@@ -6,8 +6,11 @@
 #- name: Create upstart configuration
 #  template: src=upstart.conf.j2 dest=/etc/init/{{ vagrant_worker_application_name }}.conf
 
-- name: push code
-  copy: src=../projects/{{ vagrant_worker_application_name }}/ dest={{ vagrant_worker_home }}/{{ vagrant_worker_application_name }} force=no
+- name: Create vagrant-worker configuration
+  template: src=config.py.j2 dest={{ vagrant_worker_install_dir }}/config.py
+
+#- name: push code
+  #copy: src=../projects/{{ vagrant_worker_application_name }}/ dest={{ vagrant_worker_home }}/{{ vagrant_worker_application_name }} force=no
 
 - name: Create log folder
   file: path=/var/log/{{ vagrant_worker_application_name }} owner={{ vagrant_worker_user }} group={{ vagrant_worker_user }} state=directory
@@ -22,7 +25,7 @@
   apt_key: url=http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc state=present
 
 - name: add the virtual box apt
-  apt_repository: repo="deb http://download.virtualbox.org/virtualbox/debian precise contrib" state=present
+  apt_repository: repo="deb http://download.virtualbox.org/virtualbox/debian trusty contrib" state=present
 
 - name: add the virtualbox 4.3 packages and lxc
   apt: name={{ item }} update_cache=yes
@@ -58,7 +61,7 @@
 #  service: name={{ vagrant_worker_application_name }} state=restarted
 
 - name: Installs vagrant-worker python requirements
-  pip: requirements={{ vagrant_worker_home }}/{{ vagrant_worker_application_name }}/requirements.txt
+  pip: requirements={{ vagrant_worker_install_dir }}/requirements.txt
 
 - name: Installs ansible
   pip: name=ansible

@@ -30,14 +30,8 @@
 - name: Installs jeto python requirements
   pip: requirements={{ jeto_install_dir}}/requirements.txt
 
-- name: Check if we need to generate a default config
-  command: ls {{ jeto_install_dir }}/jeto/settings_dev.py
-  register: config_exists
-  ignore_errors: true
-
 - name: Setup the initial config
   template: src=settings_dev.py.j2 dest={{ jeto_install_dir }}/jeto/settings_dev.py owner={{ jeto_user }} group={{ jeto_user }} 
-  when: config_exists|failed
 
 - name: Installs mysql
   apt: pkg=mysql-server state=installed
@@ -59,3 +53,7 @@
 
 - name: Make sure the permission are right on the debug.log
   file: path="/var/log/{{ jeto_application_name }}/debug.log" owner={{ jeto_user }} group={{ jeto_user }} state=file
+
+- name: Ensure dummy site not there
+  file: dest=/etc/nginx/sites-enabled/dummy state=absent
+  notify: reload nginx

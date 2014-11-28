@@ -1,0 +1,35 @@
+---
+# Variables listed here are applicable to all host groups
+
+admin_name: somename
+ntp_servers:
+- 0.pool.ntp.org
+- 1.pool.ntp.org
+- 2.pool.ntp.org
+- 3.pool.ntp.org
+
+server_hostname:        "jeto.mydomain.tld"
+nginx_server_hostname:  "{{ server_hostname }}"
+
+vagrant_worker_user: "vagrant"
+vagrant_worker_home: "/home/vagrant"
+vagrant_worker_install_dir: "/home/ubuntu/jeto-dev/projects/vagrant-worker"
+
+htpasswd_api_user: "htpasswdapi"
+htpasswd_api_user_home: "/home/htpasswdapi"
+htpasswd_api_install_dir: "/home/ubuntu/jeto-dev/projects/htpasswd-api"
+
+nginx_api_user: "root"
+nginx_api_user_home: "/root"
+nginx_api_install_dir: "/home/ubuntu/jeto-dev/projects/nginx-api"
+nginx_api_socket_path: "/var/run/nginx-api.pid"
+
+jeto_user: "vagrant"
+jeto_home: "/home/vagrant"
+jeto_install_dir: "/home/ubuntu/jeto-dev/projects/jeto"
+
+GOOGLE_CLIENT_ID: '000000000000000000000000000000000000000000000'
+GOOGLE_CLIENT_SECRET: 'xxxxxxxxxxxxxxxxxxxxxxxxx'
+GOOGLE_LIMIT_DOMAIN: None
+
+BRAND_IMAGE_ASSET_FILENAME: ''
