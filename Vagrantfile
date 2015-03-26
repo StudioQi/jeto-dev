@@ -13,7 +13,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.vm.synced_folder "projects/jeto", "/home/" + $user + "/jeto", owner: $user, group: $user
     v.vm.synced_folder "projects/vagrant-worker", "/home/" + $user + "/vagrant-worker", owner: $user, group: $user
     v.vm.synced_folder "projects/htpasswd-api", "/home/" + $user + "/htpasswd-api", owner: $user, group: $user 
-    v.vm.synced_folder "projects/ansible", "/home/" + $user + "/ansible", owner: $user, group: $user 
     v.vm.synced_folder "projects/nginx-api", "/root/nginx-api"
 
     v.vm.provider :virtualbox do |vb, override|
