@@ -1,12 +1,12 @@
 [submodule "projects/jeto"]
 	path = projects/jeto
-	url = git@github.com:Pheromone/jeto.git
+	url = git@github.com:StudioQi/jeto.git
 [submodule "projects/vagrant-worker"]
 	path = projects/vagrant-worker
-	url = git@github.com:Pheromone/vagrant-worker.git
+	url = git@github.com:StudioQi/vagrant-worker.git
 [submodule "projects/htpasswd-api"]
 	path = projects/htpasswd-api
-	url = git@github.com:Pheromone/htpasswd-api.git
+	url = git@github.com:StudioQi/htpasswd-api.git
 [submodule "projects/nginx-api"]
 	path = projects/nginx-api
-	url = git@github.com:Pheromone/nginx-api.git
+	url = git@github.com:StudioQi/nginx-api.git
