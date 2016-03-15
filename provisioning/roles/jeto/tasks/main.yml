@@ -24,7 +24,7 @@
 - name: Create log folder and make sure permissions are right
   file: path=/var/log/{{ jeto_application_name }} owner={{ jeto_user }} group={{ jeto_user }} state=directory recurse=yes
 
-- name: Installs the ubuntu required packages
+- name: Install the ubuntu required packages
   apt: pkg=python-mysqldb state=installed
 
 - name: Installs jeto python requirements
