@@ -19,7 +19,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       override.vm.box = "trusty64"
       override.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
       override.vm.network :private_network, ip: $ip
-      vb.memory = 1024
+      vb.memory = 4096
       vb.cpus = 2
     end
 
@@ -44,7 +44,6 @@ STR
           fi
         ]      
     end
-
     v.vm.provision "ansible" do |ansible|
       ansible.playbook = "provisioning/bootstrap.yml"
       ansible.host_key_checking = false
