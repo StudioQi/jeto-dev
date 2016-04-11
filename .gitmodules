@@ -10,3 +10,6 @@
 [submodule "projects/nginx-api"]
 	path = projects/nginx-api
 	url = https://github.com/StudioQi/nginx-api.git
+[submodule "provisioning/roles/nodesource.node"]
+	path = provisioning/roles/nodesource.node
+	url = https://github.com/nodesource/ansible-nodejs-role.git
