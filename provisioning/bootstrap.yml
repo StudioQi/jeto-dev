@@ -10,3 +10,49 @@
     - htpasswd-api
     - jeto
     - vagrant-worker
+
+  tasks:
+      - name: Update node to lastest version
+        shell:
+          executable=/bin/bash
+          npm install -g npm@latest
+
+      - name: Install node dependencies
+        shell:
+          executable=/bin/bash
+          chdir=/vagrant/projects/jeto/jeto/aurelia
+          npm install
+
+      - name: Install Gulp
+        shell:
+          executable=/bin/bash
+          npm install -g gulp
+
+      - name: Install jspm globally
+        shell:
+          executable=/bin/bash
+          npm install jspm -g
+
+      - name: Lock jspm
+        shell:
+          executable=/bin/bash
+          chdir=/vagrant/projects/jeto/jeto/aurelia
+          npm install jspm --save-dev
+
+      - name: Init jspm
+        shell:
+          executable=/bin/bash
+          chdir=/vagrant/projects/jeto/jeto/aurelia
+          jspm init -y
+
+      - name: Update jspm
+        shell:
+          executable=/bin/bash
+          chdir=/vagrant/projects/jeto/jeto/aurelia
+          jspm dl-loader --latest
+
+      - name: Install dependencies
+        shell:
+          executable=/bin/bash
+          chdir=/vagrant/projects/jeto/jeto/aurelia
+          jspm install
