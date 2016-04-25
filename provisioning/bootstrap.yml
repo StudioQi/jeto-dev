@@ -7,8 +7,8 @@
     - common
     - nginx
     - nginx-api
-#    - htpasswd-api
-#    - jeto
+    - htpasswd-api
+    - jeto
     - vagrant-worker
     - nodesource.node
     - phantomjs
