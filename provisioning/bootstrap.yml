@@ -10,8 +10,15 @@
     - htpasswd-api
     - jeto
     - vagrant-worker
+    - nodesource.node
+    - phantomjs
 
   tasks:
+      - name: Install selenium
+        shell:
+          executable=/bin/bash
+          pip install -U selenium
+
       - name: Update node to lastest version
         shell:
           executable=/bin/bash
@@ -56,3 +63,9 @@
           executable=/bin/bash
           chdir=/vagrant/projects/jeto/jeto/aurelia
           jspm install
+
+      - name: Build Jeto
+        shell:
+          executable=/bin/bash
+          chdir=/vagrant/projects/jeto/jeto/aurelia
+          gulp export

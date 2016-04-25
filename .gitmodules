@@ -13,3 +13,6 @@
 [submodule "provisioning/roles/nodesource.node"]
 	path = provisioning/roles/nodesource.node
 	url = https://github.com/nodesource/ansible-nodejs-role.git
+[submodule "provisioning/roles/phantomjs"]
+	path = provisioning/roles/phantomjs
+	url = git@github.com:palkan-ansible/phantomjs.git
